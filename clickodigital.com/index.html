@@ -2666,7 +2666,7 @@ document.querySelectorAll('.post-title').forEach(function(el) {
 	// Popup Email ----------
 	const formId = document.getElementById("brxe-ascmxj");
 	if (formId) {
-		formId.addEventListener("submit", (e) => {
+		formId.addEventListener("submit", async (e) => {
 			e.preventDefault();
 			
 			const formData = new FormData(formId);
@@ -2676,9 +2676,50 @@ document.querySelectorAll('.post-title').forEach(function(el) {
 			const message = formData.get('form-field-54f2cc');
 			const scheduleCall = formData.get('form-field-vgrpjm[]') || 'Not selected';
 			
-			// Create mailto link
-			const subject = encodeURIComponent('New Contact Form Submission - Homepage Popup');
-			const body = encodeURIComponent(`
+			// Show loading state
+			const submitBtn = formId.querySelector('button[type="submit"]');
+			const originalText = submitBtn ? submitBtn.textContent : '';
+			if (submitBtn) {
+				submitBtn.textContent = 'Sending...';
+				submitBtn.disabled = true;
+			}
+			
+			try {
+				// Send to Cloudflare Function
+				const response = await fetch('/api/send-email', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						name,
+						email,
+						phone,
+						message,
+						scheduleCall,
+						formType: 'Homepage Popup'
+					})
+				});
+				
+				const result = await response.json();
+				
+				if (result.success) {
+					alert('Thank you for your message! We will get back to you soon.');
+					// Close popup if it exists
+					const popup = document.querySelector('.brx-popup');
+					if (popup) {
+						popup.classList.add('hide');
+					}
+					formId.reset();
+				} else {
+					throw new Error(result.error || 'Failed to send message');
+				}
+			} catch (error) {
+				console.error('Form submission error:', error);
+				
+				// Fallback to mailto
+				const subject = encodeURIComponent('New Contact Form Submission - Homepage Popup');
+				const body = encodeURIComponent(`
 New Contact Form Submission
 
 Name: ${name}
@@ -2689,18 +2730,24 @@ Schedule a call: ${scheduleCall}
 
 ---
 Sent from clickodigital.com contact form
-			`);
-			
-			// Open email client
-			window.open(`mailto:hello@clickodigital.com?subject=${subject}&body=${body}`, '_blank');
-			alert('Thank you for your message! Your email client should open. If not, please email us directly at hello@clickodigital.com');
-			
-			// Close popup if it exists
-			const popup = document.querySelector('.brx-popup');
-			if (popup) {
-				popup.classList.add('hide');
+				`);
+				
+				window.open(`mailto:hello@clickodigital.com?subject=${subject}&body=${body}`, '_blank');
+				alert('Thank you for your message! Your email client should open. If not, please email us directly at hello@clickodigital.com');
+				
+				// Close popup if it exists
+				const popup = document.querySelector('.brx-popup');
+				if (popup) {
+					popup.classList.add('hide');
+				}
+				formId.reset();
+			} finally {
+				// Reset button state
+				if (submitBtn) {
+					submitBtn.textContent = originalText;
+					submitBtn.disabled = false;
+				}
 			}
-			formId.reset();
 		});
 	}
 
