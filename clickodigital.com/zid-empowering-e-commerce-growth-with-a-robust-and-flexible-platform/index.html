@@ -554,7 +554,33 @@ body {
 
 </h3><div id="brxe-isuhvs" class="brxe-block">		<form id="brxe-ascmxj" data-script-id="ascmxj" class="brxe-form" method="post" data-element-id="ascmxj">
 			
-				<div class="form-group" role="group">
+			<!-- Thank you message (hidden by default) -->
+				<div id="thank-you-message" style="display: none; width: 100%; text-align: center; padding: 15px 10px; background: #ffffff; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+					<div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px;">
+						<svg style="width: 24px; height: 24px; animation: bounce 0.6s ease-in-out;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="12" cy="12" r="10" fill="#28a745"/>
+							<path d="M8 12L11 15L16 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+						<h3 style="color: #28a745; margin: 0; font-size: 20px; font-weight: 600;">Thank You!</h3>
+					</div>
+			
+			<!-- Meeting scheduler (hidden by default) -->
+				<div id="meeting-scheduler" style="display: none; margin-top: 20px; width: 100%;">
+					<div style="text-align: center; padding: 20px; background-color: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%;">
+						<h3 style="color: #ee2a60; margin-bottom: 15px; font-size: 20px;">Schedule Your Call</h3>
+						<p style="color: #666; margin-bottom: 20px;">Choose a convenient time for your consultation</p>
+						<iframe 
+							src="https://clickodigital.salesmate.io/meetings/#/clickodigital/scheduler/clicko-digital" 
+							width="100%" 
+							height="600" 
+							frameborder="0" 
+							style="border-radius: 8px; width: 100%;"
+							title="Meeting Scheduler">
+						</iframe>
+					</div>
+				</div>
+			
+			<div class="form-group" role="group">
 				<label for="form-field-d1aea5">Full Name*</label><input id="form-field-d1aea5" name="form-field-1314f5" spellcheck="false" type="text" value required>
 				
 				
