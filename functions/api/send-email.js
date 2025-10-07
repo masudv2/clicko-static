@@ -9,6 +9,7 @@ export async function onRequestPost(context) {
   try {
     // Debug: Log environment variable
     console.log('RESEND_API_KEY available:', !!env.RESEND_API_KEY);
+    console.log('Environment keys:', Object.keys(env));
     
     // Parse the request body
     const body = await request.json();
@@ -94,9 +95,11 @@ Source: clickodigital.com
       `
     };
     
-    // Check if API key is available
-    if (!env.RESEND_API_KEY) {
-      console.error('RESEND_API_KEY not found in environment variables');
+    // Get API key from environment or use fallback
+    const apiKey = env.RESEND_API_KEY || 're_ciFGGhwD_EWw3w69J6XxPMCfkoW7BLWkC';
+    
+    if (!apiKey) {
+      console.error('No Resend API key available');
       return new Response(
         JSON.stringify({ 
           success: false, 
@@ -114,7 +117,7 @@ Source: clickodigital.com
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${env.RESEND_API_KEY}`
+        'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify(emailData)
     });

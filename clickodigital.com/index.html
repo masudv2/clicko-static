@@ -2742,28 +2742,18 @@ document.querySelectorAll('.post-title').forEach(function(el) {
 			} catch (error) {
 				console.error('Form submission error:', error);
 				
-				// Fallback to mailto
-				const subject = encodeURIComponent('New Contact Form Submission - Homepage Popup');
-				const body = encodeURIComponent(`
-New Contact Form Submission
-
-Name: ${name}
-Email: ${email}
-Phone: ${phone}
-Project Description: ${message}
-Schedule a call: ${scheduleCall}
-
----
-Sent from clickodigital.com contact form
-				`);
-				
-				window.open(`mailto:hello@clickodigital.com?subject=${subject}&body=${body}`, '_blank');
-				
-				// Show thank you message in popup
+				// Show error message in popup
 				const thankYouMessage = document.getElementById('thank-you-message');
 				const formFields = formId.querySelectorAll('.form-group');
 				
-				// Hide form fields and show thank you message
+				// Update thank you message to show error
+				thankYouMessage.innerHTML = `
+					<div style="color: #dc3545; font-size: 24px; margin-bottom: 10px;">⚠</div>
+					<h3 style="color: #dc3545; margin-bottom: 10px;">Error</h3>
+					<p style="color: #666; margin: 0;">Sorry, there was an error sending your message. Please try again or contact us directly at hello@clickodigital.com</p>
+				`;
+				
+				// Hide form fields and show error message
 				formFields.forEach(field => field.style.display = 'none');
 				thankYouMessage.style.display = 'block';
 				
@@ -2773,7 +2763,7 @@ Sent from clickodigital.com contact form
 					popupContent.scrollTop = 0;
 				}
 				
-				// Auto-close popup after 3 seconds
+				// Auto-close popup after 5 seconds
 				setTimeout(() => {
 					const popup = document.querySelector('.brx-popup');
 					if (popup) {
@@ -2783,7 +2773,13 @@ Sent from clickodigital.com contact form
 					formId.reset();
 					formFields.forEach(field => field.style.display = 'block');
 					thankYouMessage.style.display = 'none';
-				}, 3000);
+					// Reset thank you message content
+					thankYouMessage.innerHTML = `
+						<div style="color: #28a745; font-size: 24px; margin-bottom: 10px;">✓</div>
+						<h3 style="color: #28a745; margin-bottom: 10px;">Thank You!</h3>
+						<p style="color: #666; margin: 0;">Your message has been sent successfully. We'll get back to you soon!</p>
+					`;
+				}, 5000);
 			} finally {
 				// Reset button state
 				if (submitBtn) {

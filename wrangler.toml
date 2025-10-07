@@ -1,12 +1,9 @@
 name = "clicko-static"
 compatibility_date = "2024-01-01"
-
-# Pages configuration
-[env.production]
-name = "clicko-static"
+pages_build_output_dir = "clickodigital.com"
 
 # Environment variables for Resend API
-[env.production.vars]
+[vars]
 RESEND_API_KEY = "re_ciFGGhwD_EWw3w69J6XxPMCfkoW7BLWkC"
 
 # Functions configuration
