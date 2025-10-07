@@ -62,7 +62,12 @@ export async function onRequestPost(context) {
             <p><strong>Name:</strong> ${name}</p>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-            <p><strong>Files Uploaded:</strong> ${fileInfo || 'No files uploaded'}</p>
+            <p><strong>Files Uploaded:</strong></p>
+            ${fileInfo && fileInfo !== 'No files uploaded' 
+              ? `<p style="color: #0056b3; font-size: 14px;">📎 ${fileInfo}</p>
+                 <p style="font-size: 12px; color: #666;"><em>Note: File attachments are displayed as names only. Files are uploaded but not sent via email. Please contact the submitter at ${email} to receive the files.</em></p>`
+              : '<p>No files uploaded</p>'
+            }
             <p><strong>Schedule a call:</strong> ${scheduleCall || 'Not selected'}</p>
           </div>
           

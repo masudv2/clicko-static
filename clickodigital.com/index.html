@@ -553,8 +553,13 @@ results with our data-driven marketing strategies.</p></div><?xml encoding="UTF-
 			
 				<!-- Thank you message (hidden by default) -->
 				<div id="thank-you-message" style="display: none; width: 100%; text-align: center; padding: 15px 10px; background: #ffffff; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-					<div style="color: #28a745; font-size: 24px; margin-bottom: 10px; animation: bounce 0.6s ease-in-out;">✓</div>
-					<h3 style="color: #28a745; margin-bottom: 8px; font-size: 20px; font-weight: 600;">Thank You!</h3>
+					<div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px;">
+						<svg style="width: 24px; height: 24px; animation: bounce 0.6s ease-in-out;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="12" cy="12" r="10" fill="#28a745"/>
+							<path d="M8 12L11 15L16 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+						<h3 style="color: #28a745; margin: 0; font-size: 20px; font-weight: 600;">Thank You!</h3>
+					</div>
 					<p style="color: #666; margin: 0; font-size: 14px; line-height: 1.4;">Your message has been sent successfully. We'll get back to you soon!</p>
 				</div>
 				
@@ -2829,8 +2834,13 @@ document.querySelectorAll('.post-title').forEach(function(el) {
 				
 				// Update thank you message to show error
 				thankYouMessage.innerHTML = `
-					<div style="color: #dc3545; font-size: 24px; margin-bottom: 10px; animation: bounce 0.6s ease-in-out;">⚠</div>
-					<h3 style="color: #dc3545; margin-bottom: 8px; font-size: 20px; font-weight: 600;">Error</h3>
+					<div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px;">
+						<svg style="width: 24px; height: 24px; animation: bounce 0.6s ease-in-out;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="12" cy="12" r="10" fill="#dc3545"/>
+							<path d="M12 8V12M12 16H12.01" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+						<h3 style="color: #dc3545; margin: 0; font-size: 20px; font-weight: 600;">Error</h3>
+					</div>
 					<p style="color: #666; margin: 0; font-size: 14px; line-height: 1.4;">Sorry, there was an error sending your message. Please try again or contact us directly at hello@clickodigital.com</p>
 				`;
 				
@@ -2856,8 +2866,13 @@ document.querySelectorAll('.post-title').forEach(function(el) {
 					thankYouMessage.style.display = 'none';
 					// Reset thank you message content
 					thankYouMessage.innerHTML = `
-						<div style="color: #28a745; font-size: 24px; margin-bottom: 10px; animation: bounce 0.6s ease-in-out;">✓</div>
-						<h3 style="color: #28a745; margin-bottom: 8px; font-size: 20px; font-weight: 600;">Thank You!</h3>
+						<div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px;">
+							<svg style="width: 24px; height: 24px; animation: bounce 0.6s ease-in-out;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="12" cy="12" r="10" fill="#28a745"/>
+								<path d="M8 12L11 15L16 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+							<h3 style="color: #28a745; margin: 0; font-size: 20px; font-weight: 600;">Thank You!</h3>
+						</div>
 						<p style="color: #666; margin: 0; font-size: 14px; line-height: 1.4;">Your message has been sent successfully. We'll get back to you soon!</p>
 					`;
 					// Hide meeting scheduler
@@ -2879,7 +2894,7 @@ document.querySelectorAll('.post-title').forEach(function(el) {
 	// Contact Email ----------
 	const cFormId = document.getElementById("brxe-phpbme");
 	if (cFormId) {
-		cFormId.addEventListener("submit", (e) => {
+	cFormId.addEventListener("submit", (e) => {
 			e.preventDefault();
 			// Form submission handled by form action or external service
 			alert('Thank you for your message! We will get back to you soon.');
