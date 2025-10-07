@@ -538,6 +538,13 @@ results with our data-driven marketing strategies.</p></div><?xml encoding="UTF-
 
 </h3><div id="brxe-isuhvs" class="brxe-block">		<form id="brxe-ascmxj" data-script-id="ascmxj" class="brxe-form" method="post" data-element-id="ascmxj">
 			
+				<!-- Thank you message (hidden by default) -->
+				<div id="thank-you-message" style="display: none; text-align: center; padding: 20px; background-color: #f8f9fa; border-radius: 8px; margin-bottom: 20px;">
+					<div style="color: #28a745; font-size: 24px; margin-bottom: 10px;">✓</div>
+					<h3 style="color: #28a745; margin-bottom: 10px;">Thank You!</h3>
+					<p style="color: #666; margin: 0;">Your message has been sent successfully. We'll get back to you soon!</p>
+				</div>
+			
 				<div class="form-group" role="group">
 				<label for="form-field-cb0296">Full Name*</label><input id="form-field-cb0296" name="form-field-1314f5" spellcheck="false" type="text" value required>
 				
@@ -2619,7 +2626,7 @@ var flatPreloader = {"delayTime":"1000","showPreloaderInstantly":"1","host":"cli
 </script>
 <script src="wp-content/plugins/flat-preloader/assets/js/flat-preloader%EF%B9%96ver=1.16.0.js" id="flat-preloader-js-js"></script>
 <script id="bricks-scripts-js-extra">
-var bricksData = {"debug":"","locale":"en_US","ajaxUrl":"https:\/\/clickodigital.com\/wp-admin\/admin-ajax.php","restApiUrl":"https:\/\/clickodigital.com\/wp-json\/bricks\/v1\/","nonce":"4ae63da24b","formNonce":"fbf8cf2f50","wpRestNonce":"360e5e5655","postId":"8","recaptchaIds":[],"animatedTypingInstances":[],"videoInstances":[],"splideInstances":[],"tocbotInstances":[],"swiperInstances":[],"queryLoopInstances":[],"interactions":[],"filterInstances":[],"isotopeInstances":[],"activeFiltersCountInstances":[],"googleMapInstances":[],"facebookAppId":"","headerPosition":"top","offsetLazyLoad":"300","baseUrl":"https:\/\/clickodigital.com\/","useQueryFilter":"","pageFilters":[],"language":"","wpmlUrlFormat":"","multilangPlugin":"","i18n":{"openAccordion":"Open accordion","openMobileMenu":"Open mobile menu","closeMobileMenu":"Close mobile menu","showPassword":"Show password","hidePassword":"Hide password","prevSlide":"Previous slide","nextSlide":"Next slide","firstSlide":"Go to first slide","lastSlide":"Go to last slide","slideX":"Go to slide %s","play":"Start autoplay","pause":"Pause autoplay","splide":{"carousel":"carousel","select":"Select a slide to show","slide":"slide","slideLabel":"%1$s of %2$s"},"swiper":{"slideLabelMessage":"{{index}} \/ {{slidesLength}}"},"noLocationsFound":"No locations found","locationTitle":"Location title","locationSubtitle":"Location subtitle","locationContent":"Location content"},"selectedFilters":[],"filterNiceNames":[],"bricksGoogleMarkerScript":"https:\/\/clickodigital.com\/wp-content\/themes\/bricks\/assets\/js\/libs\/bricks-google-marker.min.js?v=2.0.1","infoboxScript":"https:\/\/clickodigital.com\/wp-content\/themes\/bricks\/assets\/js\/libs\/infobox.min.js?v=2.0.1","markerClustererScript":"https:\/\/clickodigital.com\/wp-content\/themes\/bricks\/assets\/js\/libs\/markerclusterer.min.js?v=2.0.1","mainQueryId":""};
+var bricksData = {"debug":"","locale":"en_US","ajaxUrl":"","restApiUrl":"","nonce":"4ae63da24b","formNonce":"fbf8cf2f50","wpRestNonce":"360e5e5655","postId":"8","recaptchaIds":[],"animatedTypingInstances":[],"videoInstances":[],"splideInstances":[],"tocbotInstances":[],"swiperInstances":[],"queryLoopInstances":[],"interactions":[],"filterInstances":[],"isotopeInstances":[],"activeFiltersCountInstances":[],"googleMapInstances":[],"facebookAppId":"","headerPosition":"top","offsetLazyLoad":"300","baseUrl":"https:\/\/clickodigital.com\/","useQueryFilter":"","pageFilters":[],"language":"","wpmlUrlFormat":"","multilangPlugin":"","i18n":{"openAccordion":"Open accordion","openMobileMenu":"Open mobile menu","closeMobileMenu":"Close mobile menu","showPassword":"Show password","hidePassword":"Hide password","prevSlide":"Previous slide","nextSlide":"Next slide","firstSlide":"Go to first slide","lastSlide":"Go to last slide","slideX":"Go to slide %s","play":"Start autoplay","pause":"Pause autoplay","splide":{"carousel":"carousel","select":"Select a slide to show","slide":"slide","slideLabel":"%1$s of %2$s"},"swiper":{"slideLabelMessage":"{{index}} \/ {{slidesLength}}"},"noLocationsFound":"No locations found","locationTitle":"Location title","locationSubtitle":"Location subtitle","locationContent":"Location content"},"selectedFilters":[],"filterNiceNames":[],"bricksGoogleMarkerScript":"https:\/\/clickodigital.com\/wp-content\/themes\/bricks\/assets\/js\/libs\/bricks-google-marker.min.js?v=2.0.1","infoboxScript":"https:\/\/clickodigital.com\/wp-content\/themes\/bricks\/assets\/js\/libs\/infobox.min.js?v=2.0.1","markerClustererScript":"https:\/\/clickodigital.com\/wp-content\/themes\/bricks\/assets\/js\/libs\/markerclusterer.min.js?v=2.0.1","mainQueryId":""};
 </script>
 <script src="wp-content/themes/bricks/assets/js/bricks.min%EF%B9%96ver=1753782317.js" id="bricks-scripts-js"></script>
 <script defer="defer" src="wp-content/themes/bricks/assets/js/libs/photoswipe.umd.min%EF%B9%96ver=5.4.4.js" id="bricks-photoswipe-js"></script>
@@ -2704,13 +2711,31 @@ document.querySelectorAll('.post-title').forEach(function(el) {
 				const result = await response.json();
 				
 				if (result.success) {
-					alert('Thank you for your message! We will get back to you soon.');
-					// Close popup if it exists
-					const popup = document.querySelector('.brx-popup');
-					if (popup) {
-						popup.classList.add('hide');
+					// Show thank you message in popup
+					const thankYouMessage = document.getElementById('thank-you-message');
+					const formFields = formId.querySelectorAll('.form-group');
+					
+					// Hide form fields and show thank you message
+					formFields.forEach(field => field.style.display = 'none');
+					thankYouMessage.style.display = 'block';
+					
+					// Scroll to top of popup
+					const popupContent = document.querySelector('.brx-popup-content');
+					if (popupContent) {
+						popupContent.scrollTop = 0;
 					}
-					formId.reset();
+					
+					// Auto-close popup after 3 seconds
+					setTimeout(() => {
+						const popup = document.querySelector('.brx-popup');
+						if (popup) {
+							popup.classList.add('hide');
+						}
+						// Reset form and show fields again
+						formId.reset();
+						formFields.forEach(field => field.style.display = 'block');
+						thankYouMessage.style.display = 'none';
+					}, 3000);
 				} else {
 					throw new Error(result.error || 'Failed to send message');
 				}
@@ -2733,14 +2758,32 @@ Sent from clickodigital.com contact form
 				`);
 				
 				window.open(`mailto:hello@clickodigital.com?subject=${subject}&body=${body}`, '_blank');
-				alert('Thank you for your message! Your email client should open. If not, please email us directly at hello@clickodigital.com');
 				
-				// Close popup if it exists
-				const popup = document.querySelector('.brx-popup');
-				if (popup) {
-					popup.classList.add('hide');
+				// Show thank you message in popup
+				const thankYouMessage = document.getElementById('thank-you-message');
+				const formFields = formId.querySelectorAll('.form-group');
+				
+				// Hide form fields and show thank you message
+				formFields.forEach(field => field.style.display = 'none');
+				thankYouMessage.style.display = 'block';
+				
+				// Scroll to top of popup
+				const popupContent = document.querySelector('.brx-popup-content');
+				if (popupContent) {
+					popupContent.scrollTop = 0;
 				}
-				formId.reset();
+				
+				// Auto-close popup after 3 seconds
+				setTimeout(() => {
+					const popup = document.querySelector('.brx-popup');
+					if (popup) {
+						popup.classList.add('hide');
+					}
+					// Reset form and show fields again
+					formId.reset();
+					formFields.forEach(field => field.style.display = 'block');
+					thankYouMessage.style.display = 'none';
+				}, 3000);
 			} finally {
 				// Reset button state
 				if (submitBtn) {

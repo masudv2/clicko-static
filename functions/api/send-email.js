@@ -7,8 +7,12 @@ export async function onRequestPost(context) {
   const { request, env } = context;
   
   try {
+    // Debug: Log environment variable
+    console.log('RESEND_API_KEY available:', !!env.RESEND_API_KEY);
+    
     // Parse the request body
     const body = await request.json();
+    console.log('Request body:', body);
     
     // Validate required fields
     const { name, email, message, phone, scheduleCall, formType } = body;
@@ -89,6 +93,21 @@ Submitted: ${new Date().toLocaleString()}
 Source: clickodigital.com
       `
     };
+    
+    // Check if API key is available
+    if (!env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY not found in environment variables');
+      return new Response(
+        JSON.stringify({ 
+          success: false, 
+          error: 'Email service not configured' 
+        }),
+        { 
+          status: 500,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      );
+    }
     
     // Call Resend API
     const resendResponse = await fetch('https://api.resend.com/emails', {
