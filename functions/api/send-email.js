@@ -16,7 +16,7 @@ export async function onRequestPost(context) {
     console.log('Request body:', body);
     
     // Validate required fields
-    const { name, email, message, phone, scheduleCall, formType } = body;
+    const { name, email, message, phone, scheduleCall, formType, fileInfo } = body;
     
     if (!name || !email || !message) {
       return new Response(
@@ -62,6 +62,7 @@ export async function onRequestPost(context) {
             <p><strong>Name:</strong> ${name}</p>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
+            <p><strong>Files Uploaded:</strong> ${fileInfo || 'No files uploaded'}</p>
             <p><strong>Schedule a call:</strong> ${scheduleCall || 'Not selected'}</p>
           </div>
           
