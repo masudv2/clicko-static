@@ -16,7 +16,7 @@ export async function onRequestPost(context) {
     console.log('Request body:', body);
     
     // Validate required fields
-    const { name, email, message, phone, scheduleCall, formType, fileInfo } = body;
+    const { name, email, message, phone, scheduleCall, formType, attachments } = body;
     
     if (!name || !email || !message) {
       return new Response(
@@ -51,6 +51,7 @@ export async function onRequestPost(context) {
       from: 'noreply@clickodigital.com',
       to: ['hello@clickodigital.com'],
       subject: `New Contact Form Submission - ${formType || 'Website'}`,
+      attachments: attachments && attachments.length > 0 ? attachments : undefined,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #ee2a60; border-bottom: 2px solid #ee2a60; padding-bottom: 10px;">
@@ -62,10 +63,10 @@ export async function onRequestPost(context) {
             <p><strong>Name:</strong> ${name}</p>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-            <p><strong>Files Uploaded:</strong></p>
-            ${fileInfo && fileInfo !== 'No files uploaded' 
-              ? `<p style="color: #0056b3; font-size: 14px;">📎 ${fileInfo}</p>
-                 <p style="font-size: 12px; color: #666;"><em>Note: File attachments are displayed as names only. Files are uploaded but not sent via email. Please contact the submitter at ${email} to receive the files.</em></p>`
+            <p><strong>Files Attached:</strong></p>
+            ${attachments && attachments.length > 0 
+              ? `<p style="color: #0056b3; font-size: 14px;">📎 ${attachments.map(a => a.filename).join(', ')}</p>
+                 <p style="font-size: 12px; color: #28a745;"><em>✓ Files are attached to this email</em></p>`
               : '<p>No files uploaded</p>'
             }
             <p><strong>Schedule a call:</strong> ${scheduleCall || 'Not selected'}</p>
@@ -89,6 +90,7 @@ New Contact Form Submission
 Name: ${name}
 Email: ${email}
 Phone: ${phone || 'Not provided'}
+Files Attached: ${attachments && attachments.length > 0 ? attachments.map(a => a.filename).join(', ') : 'No files uploaded'}
 Schedule a call: ${scheduleCall || 'Not selected'}
 
 Message:
