@@ -249,14 +249,29 @@ body {
     font-display: block;
 }</style>
 
-/* form spacing normalization */
 <style>
+  /* form spacing normalization */
   .brxe-form .form-group { margin-bottom: 12px; }
   .brxe-form .form-group:last-child { margin-bottom: 0; }
 </style>
+<style id="hide-preloader-on-load">
+  #flat-preloader-overlay { transition: opacity 0.5s ease; }
+  body.loaded #flat-preloader-overlay { opacity: 0; pointer-events: none; }
+</style>
+<script>
+  window.addEventListener("load", function() {
+    setTimeout(function() {
+      document.body.classList.add("loaded");
+      setTimeout(function() {
+        var preloader = document.getElementById("flat-preloader-overlay");
+        if (preloader) preloader.style.display = "none";
+      }, 500);
+    }, 1000);
+  });
+</script>
 </head>
 
-<body class="wp-singular page-template-default page page-id-6835 wp-theme-bricks flat-preloader-active brx-body bricks-is-frontend wp-embed-responsive">		<a class="skip-link" href="#brx-content">Skip to main content</a>
+<body class="wp-singular page-template-default page page-id-6835 wp-theme-bricks  brx-body bricks-is-frontend wp-embed-responsive">		<a class="skip-link" href="#brx-content">Skip to main content</a>
 
 					<a class="skip-link" href="#brx-footer">Skip to footer</a>
 			<header id="brx-header" class="sticky on-scroll" data-slide-up-after="500"><section id="brxe-juawuq" class="brxe-section"><div id="brxe-qfpyxs" class="brxe-container"><div id="brxe-zqfrsd" class="brxe-div"><a id="brxe-dbtglj" class="brxe-logo" href="../index.html"><img width="2400" height="620" src="../wp-content/uploads/2024/11/header-logo-new.png" class="bricks-site-logo css-filter" alt="Clicko Digital" data-bricks-logo="../wp-content/uploads/2024/11/header-logo-new.png" loading="eager" decoding="async" srcset="../wp-content/uploads/2024/11/header-logo-new.png 315w" sizes="(max-width: 2400px) 100vw, 2400px" /></a><div id="brxe-mzdwec" class="brxe-div"><div id="brxe-ovijep" data-script-id="ovijep" class="brxe-nav-menu"><nav class="bricks-nav-menu-wrapper mobile_landscape"><ul id="menu-main-menu" class="bricks-nav-menu"><li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-71 bricks-menu-item"><a href="../index.html">Home</a></li>
@@ -1472,10 +1487,8 @@ a {
 }
 
 </style>
-<script id="flat-preloader-js-js-extra">
-var flatPreloader = {"delayTime":"1000","showPreloaderInstantly":"1","host":"","ignores":["^https?:\\\/\\\/[^\\\/]+\\\/case\\-study\\-web\\-app\\-ethos\\-custom\\-dashboard\\\/(#.*)?$","^https\\:\\\/\\\/clickodigital\\.com\\\/wp\\-admin\\\/","^https\\:\\\/\\\/clickodigital\\.com[^?#]+\\.php","\\\/wp\\-content",".*\\?.+","^\\\/case\\-study\\-web\\-app\\-ethos\\-custom\\-dashboard\\\/(#.*)?$","^#.*","^mailto:.*","^tel:.*"],"display":"all"};
-</script>
-<script src="../wp-content/plugins/flat-preloader/assets/js/flat-preloader%EF%B9%96ver=1.16.0.js" id="flat-preloader-js-js"></script>
+
+
 <script id="bricks-scripts-js-extra">
 var bricksData = {"debug":"","locale":"en_US","ajaxUrl":"","restApiUrl":"","nonce":"4ae63da24b","formNonce":"fbf8cf2f50","wpRestNonce":"360e5e5655","postId":"6835","recaptchaIds":[],"animatedTypingInstances":[],"videoInstances":[],"splideInstances":[],"tocbotInstances":[],"swiperInstances":[],"queryLoopInstances":[],"interactions":[],"filterInstances":[],"isotopeInstances":[],"activeFiltersCountInstances":[],"googleMapInstances":[],"facebookAppId":"","headerPosition":"top","offsetLazyLoad":"300","baseUrl":"https:\/\/clickodigital.com\/case-study-web-app-ethos-custom-dashboard\/","useQueryFilter":"","pageFilters":[],"language":"","wpmlUrlFormat":"","multilangPlugin":"","i18n":{"openAccordion":"Open accordion","openMobileMenu":"Open mobile menu","closeMobileMenu":"Close mobile menu","showPassword":"Show password","hidePassword":"Hide password","prevSlide":"Previous slide","nextSlide":"Next slide","firstSlide":"Go to first slide","lastSlide":"Go to last slide","slideX":"Go to slide %s","play":"Start autoplay","pause":"Pause autoplay","splide":{"carousel":"carousel","select":"Select a slide to show","slide":"slide","slideLabel":"%1$s of %2$s"},"swiper":{"slideLabelMessage":"{{index}} \/ {{slidesLength}}"},"noLocationsFound":"No locations found","locationTitle":"Location title","locationSubtitle":"Location subtitle","locationContent":"Location content"},"selectedFilters":[],"filterNiceNames":[],"bricksGoogleMarkerScript":"https:\/\/clickodigital.com\/wp-content\/themes\/bricks\/assets\/js\/libs\/bricks-google-marker.min.js?v=2.0.1","infoboxScript":"https:\/\/clickodigital.com\/wp-content\/themes\/bricks\/assets\/js\/libs\/infobox.min.js?v=2.0.1","markerClustererScript":"https:\/\/clickodigital.com\/wp-content\/themes\/bricks\/assets\/js\/libs\/markerclusterer.min.js?v=2.0.1","mainQueryId":""};
 </script>
