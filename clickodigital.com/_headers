@@ -1,0 +1,67 @@
+# Cloudflare Pages Browser Caching Headers
+# Optimized for PageSpeed performance
+
+# Cache static assets for 1 year
+/wp-content/uploads/*
+  Cache-Control: public, max-age=31536000, immutable
+  
+/wp-content/themes/*
+  Cache-Control: public, max-age=31536000, immutable
+  
+/wp-content/plugins/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache CSS and JS for 1 year
+*.css
+  Cache-Control: public, max-age=31536000, immutable
+  
+*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache images for 1 year
+*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+  
+*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+  
+*.png
+  Cache-Control: public, max-age=31536000, immutable
+  
+*.gif
+  Cache-Control: public, max-age=31536000, immutable
+  
+*.webp
+  Cache-Control: public, max-age=31536000, immutable
+  
+*.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache fonts for 1 year
+*.woff
+  Cache-Control: public, max-age=31536000, immutable
+  
+*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+  
+*.ttf
+  Cache-Control: public, max-age=31536000, immutable
+  
+*.eot
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML files - cache for 1 hour (can be updated more frequently)
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Root HTML
+/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Security headers for all files
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+
